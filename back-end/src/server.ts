@@ -15,8 +15,8 @@ app.get("/add", async (req: Request, res: Response) => {
     const user = await prisma.user.create({
       data: {
         name: faker.name.fullName(),
-        email: faker.internet.email()
-      }
+        email: faker.internet.email(),
+      },
     });
     res.status(httpStatus.CREATED).send(user);
   } catch (error) {
@@ -31,9 +31,11 @@ app.get("/all", async (req: Request, res: Response) => {
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
   }
-})
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is up and running on port ${port}`);
-})
+});
+
+export default app;
