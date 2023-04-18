@@ -1,7 +1,7 @@
 import supertest from "supertest";
 import prisma from "../../src/database";
 import httpStatus from "http-status";
-import app from "../../src/server";
+import app from "../../src/app";
 
 const agent = supertest(app);
 
@@ -10,6 +10,10 @@ describe("integration test", () => {
     await prisma.user.deleteMany();
   });
 
+/*   afterAll(async () => {
+    await prisma.$disconnect(); // Encerra a conexão com o banco de dados
+  });
+ */
   it("should register a user", async () => {
     const { status } = await agent.get("/add");
     expect(status).toBe(httpStatus.CREATED);
